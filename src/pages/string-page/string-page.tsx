@@ -7,6 +7,7 @@ import {ElementStates} from "../../types/element-states";
 import {ICircleDetail, IColumn} from "../../types/types";
 import {DELAY_IN_MS} from "../../constants/delays";
 import {Circle} from "../../components/ui/circle/circle";
+import {setDelay} from "../../utils/set-delay";
 
 export const StringComponent: React.FC = () => {
     const [inputValue, setInputValue] = useState('')
@@ -33,17 +34,7 @@ export const StringComponent: React.FC = () => {
         })
         settingArrayCharacters([...arrayElements]);
 
-        /**
-         * setDelay - устанавлевает задержку
-         * @param delay - значение задеркжи отображения
-         */
-        const setDelay = (delay: number = DELAY_IN_MS): Promise<null> => {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(null);
-                }, delay);
-            })
-        };
+        await setDelay();
 
         for (
             let array = arrayElements, start = 0, end = array.length - 1; // -1 => предотвращаем ошибку ограждения элементов, известную как «выход за один».
