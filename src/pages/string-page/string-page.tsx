@@ -120,7 +120,7 @@ export const StringComponent: React.FC = () => {
                 </Button>
             </form>
             <ol className={style.string}>
-                {arrayCharacters && arrayCharacters.map((characters: ICircleDetail, index: number) => {
+                {arrayCharacters.map((characters: ICircleDetail, index: number) => {
                     return (
                         <li key={index}>
                             <Circle letter={characters.symbol} state={characters.state}/>
