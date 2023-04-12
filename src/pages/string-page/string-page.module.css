@@ -10,7 +10,8 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    background: #7ebfed;
     margin: 0 auto;
     padding: 120px 0 0 0;
+    list-style: none;
+    gap: 16px;
 }
