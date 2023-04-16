@@ -110,7 +110,7 @@ export const StringComponent: React.FC = () => {
                         isLoader={isLoading}>
                 </Button>
             </form>
-            <ol className={style.string}>
+            <ol className={style.string} style={{flexWrap: "nowrap"}}>
                 {arrayCharacters.map((characters: ICircleDetail, index: number) => {
                     return (
                         <li key={index}>
