@@ -1,10 +1,85 @@
-import React from "react";
-import { SolutionLayout } from "../../components/ui/solution-layout/solution-layout";
+import React, {Dispatch, FormEvent, SetStateAction, useState} from "react";
+import {SolutionLayout} from "../../components/ui/solution-layout/solution-layout";
+import style from "../string-page/string-page.module.css";
+import {Input} from "../../components/ui/input/input";
+import {Button} from "../../components/ui/button/button";
+import {Circle} from "../../components/ui/circle/circle";
+import {setDelay} from "../../utils/set-delay";
+import {SHORT_DELAY_IN_MS} from "../../constants/delays";
+import {getFibArray} from "./utils/get-fib-array";
 
 export const FibonacciPage: React.FC = () => {
-  return (
-    <SolutionLayout title="Последовательность Фибоначчи">
-     
-    </SolutionLayout>
-  );
+    const [inputValue, setInputValue] = useState<number>()
+    const [arrayNum, setArrayNum] = useState<number[]>([])
+    const [isLoading, setIsLoading] = useState(false)
+
+    /**
+     * @param e -отправляет данные формы
+     */
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        inputValue && calculateFibonacci(inputValue, setInputValue, setArrayNum, setIsLoading)
+    }
+    /**
+     * @param e - Установить входящие значения, двухстороннее связывание.
+     */
+    const onChange = (e: FormEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        setInputValue(Number(e.currentTarget.value))
+    }
+
+    /**
+     * calculateFibonacci -  вычисляет последовательность числе, первые два числа которой являются 0 и 1, а каждое последующее за ними число является суммой двух предыдущих
+     * @param inputValue - Входящие параметры
+     * @param settingInputValues - Настройка входящих значений, очистка.
+     * @param settingArrayNum - Настройка элементов массива
+     * @param settingLoading - Настройка загрузки, блокировка кнопки
+     */
+    const calculateFibonacci = async (
+        inputValue: number,
+        settingInputValues: Dispatch<SetStateAction<number | undefined>>,
+        settingArrayNum: Dispatch<SetStateAction<number[]>>,
+        settingLoading: Dispatch<SetStateAction<boolean>>
+    ) => {
+        settingInputValues(0)
+        settingLoading(true);
+        const resultArray =[...getFibArray(inputValue)]
+        const renderResultArray: number[] = [];
+        for(let element of resultArray) {
+            renderResultArray.push(element)
+            settingArrayNum([...renderResultArray])
+            await setDelay(SHORT_DELAY_IN_MS)
+        }
+        settingLoading(false)
+    }
+
+    return (
+        <SolutionLayout title="Последовательность Фибоначчи">
+            <form className={style.wrapper}
+                  onSubmit={onSubmit}>
+                <Input value={inputValue}
+                       onChange={onChange}
+                       type={'number'}
+                       isLimitText={true}
+                       max={19}
+                       placeholder={'Введите число'}
+                >
+                </Input>
+                <Button type={"submit"}
+                        disabled={!inputValue}
+                        text={'Рассчитать'}
+                        isLoader={isLoading}>
+                </Button>
+            </form>
+            <ol className={style.string} style={{paddingTop: 48}}>
+                {arrayNum.map((number:number, index:number) => {
+                    return (
+                        <li key={index}>
+                            <Circle letter={number.toString()} index={index}/>
+                        </li>
+                    )
+                })}
+            </ol>
+        </SolutionLayout>
+    );
 };
