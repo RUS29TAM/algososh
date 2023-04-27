@@ -197,9 +197,9 @@ export const SortingPage: React.FC = () => {
                             sorting={Direction.Ascending}
                             onClick={() => sorting === 'selection'
                                 ?
-                                selectionSorting('descending', initialArray, setInitialArray, setIsLoading)
+                                selectionSorting('ascending', initialArray, setInitialArray, setIsLoading)
                                 :
-                                bubbleSorting('descending', initialArray, setInitialArray, setIsLoading)}
+                                bubbleSorting('ascending', initialArray, setInitialArray, setIsLoading)}
                             isLoader={stateList.isIncreasing}
                             disabled={stateList.isDecreasing}
                     />
