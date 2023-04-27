@@ -4,10 +4,11 @@ import style from './string-page.module.css'
 import {Input} from "../../components/ui/input/input";
 import {Button} from "../../components/ui/button/button";
 import {ElementStates} from "../../types/element-states";
-import {ICircleDetail, IColumn} from "../../types/types";
+import {ICircleDetail} from "../../types/types";
 import {DELAY_IN_MS} from "../../constants/delays";
 import {Circle} from "../../components/ui/circle/circle";
 import {setDelay} from "../../utils/set-delay";
+import {swapArrayDetails} from "../../utils/swap-array-details";
 
 export const StringComponent: React.FC = () => {
     const [inputValue, setInputValue] = useState('')
@@ -51,21 +52,7 @@ export const StringComponent: React.FC = () => {
                 array[end].state = ElementStates.Changing;
                 setArrayCharacters([...array]);
                 await setDelay(DELAY_IN_MS)
-
-                /**
-                 * swapArrayDetails - меняет местами элементы массива
-                 * @param array - массив элементов
-                 * @param firstIndex - индекс первого элемента массива
-                 * @param secondIndex - индекс второго элемента массива
-                 */
-                const swapArrayDetails = (
-                    array: ICircleDetail[] | IColumn[],
-                    firstIndex: number,
-                    secondIndex: number,
-                ): void => {
-                    [array[firstIndex], array[secondIndex]] = [array[secondIndex], array[firstIndex]]
-                }
-
+                //расставляяем элементы
                 swapArrayDetails(array, start, end);
                 //визуализируем действие
                 array[start].state = ElementStates.Modified;
