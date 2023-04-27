@@ -40,7 +40,7 @@ export const StackPage: React.FC = () => {
                         disabled={!inputValue}
                         text={'Очистить'}
                         isLoader={isLoading}
-                        style={{marginLeft: 80}}
+                        style={{marginLeft: 68}}
                 >
                 </Button>
             </form>
