@@ -1,0 +1,32 @@
+.menu {
+    display: flex;
+    justify-content: space-between;
+    width: 980px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.diagram {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 48px 0 0 0;
+    list-style: none;
+    gap: 10px;
+    max-width: 980px;
+    align-items: flex-end;
+    height: 368px;
+}
+
+.radio {
+    display: flex;
+    gap: 40px;
+    width: 221px;
+}
+
+.btn {
+    display: flex;
+    gap: 12px;
+    width: 707px;
+}
+
