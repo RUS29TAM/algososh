@@ -202,6 +202,7 @@ export const SortingPage: React.FC = () => {
                                 bubbleSorting('ascending', initialArray, setInitialArray, setIsLoading)}
                             isLoader={stateList.isIncreasing}
                             disabled={stateList.isDecreasing}
+                            style={{minWidth: 205}}
                     />
                     <Button type={'submit'}
                             text={'По убыванию'}
@@ -213,6 +214,7 @@ export const SortingPage: React.FC = () => {
                                 bubbleSorting('descending', initialArray, setInitialArray, setIsLoading)}
                             isLoader={stateList.isDecreasing}
                             disabled={stateList.isIncreasing}
+                            style={{minWidth: 205}}
                     />
                     <Button type={'submit'}
                             text={'Новый массив'}
