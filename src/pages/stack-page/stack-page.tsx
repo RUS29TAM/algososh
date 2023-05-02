@@ -84,12 +84,12 @@ export const StackPage: React.FC = () => {
                        isLimitText={true}
                        maxLength={4}
                        style={{width: 377}}
-                       disabled={isLoading || isDelete}
+                       disabled={isLoading || isDelete || arrayCharacters.length > 12}
                 >
                 </Input>
                 <Button type={"submit"}
                         isLoader={isLoading}
-                        disabled={!inputValue || isDelete || arrayCharacters.length > 12}
+                        disabled={!inputValue || isDelete}
                         text={'Добавить'}
                 >
                 </Button>
@@ -108,7 +108,7 @@ export const StackPage: React.FC = () => {
                 >
                 </Button>
             </form>
-            <ol className={style.string}>
+            <ol className={style.string} style={{flexWrap: "nowrap", paddingTop: 48}}>
                 {arrayCharacters.map((characters, index) => {
                     return (
                         <li key={index}>
