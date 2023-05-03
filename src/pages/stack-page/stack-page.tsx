@@ -38,13 +38,13 @@ export const StackPage: React.FC = () => {
         stack.push(inputValue);//добавляем стэк в конец массива
         setInputValue('');//очищаем инпут для ввода новых значений
         arrayCharacters.forEach((element) => {//последовательно перебраем все элементы массива для визуализации по дефолту.
-            element.head = '';
-            element.state = ElementStates.Default;
+            element.head = '';//убираем подпись "top".
+            element.state = ElementStates.Default;//возвращаем дефолтное состояние
         });
         const lastElement = stack.peak();//находим крайний добавленный эелмент
         arrayCharacters.push({ //добавляем его в стейт
-            characters: lastElement ? lastElement : '',//если нет, то оставляем пустым
-            state: ElementStates.Default
+            characters: lastElement ? lastElement : '',//если не находим, то оставляем пустым
+            state: ElementStates.Default//возвращаем дефолтное состояние
         })
         arrayCharacters[arrayCharacters.length - 1].head = 'top';//меняем стейт для для головы
         arrayCharacters[arrayCharacters.length - 1].state = ElementStates.Changing;//визуализируем изменения

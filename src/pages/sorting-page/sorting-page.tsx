@@ -39,11 +39,11 @@ export const SortingPage: React.FC = () => {
     // const randomArray = generateRandomArray(5, 10);
     //
 
-    const createArray = () => {
+    const createArray = () => {//создадим массив с параметрами
         setInitialArray([...array(3, 17, 100)])
     }
 
-    useEffect(() => {
+    useEffect(() => {//отрисуем массив
         createArray()
     }, []);
 
@@ -70,11 +70,10 @@ export const SortingPage: React.FC = () => {
         array.forEach((element) => (element.state = ElementStates.Default))
 
         for (let i = 0; i < array.length - 1; i++) {
-            let minIndex = i;
-            array[minIndex].state = ElementStates.Changing;
+            let minIndex = i;//i - наименьший по индексу элемент
+            array[minIndex].state = ElementStates.Changing;//визуализируем изменения
             for (let j = i + 1; j < array.length; j++) {
-                //визуализируем елемент
-                array[j].state = ElementStates.Changing;
+                array[j].state = ElementStates.Changing;//визуализируем елемент
                 //отрисовываем
                 initialArraySettings([...array]);
                 await setDelay(SHORT_DELAY_IN_MS);
