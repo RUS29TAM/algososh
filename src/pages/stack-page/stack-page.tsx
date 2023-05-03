@@ -5,7 +5,7 @@ import {Input} from "../../components/ui/input/input";
 import {Button} from "../../components/ui/button/button";
 import {Circle} from "../../components/ui/circle/circle";
 import {ICircleDetail} from "../../types/types";
-import {Stack} from "../../utils/stack";
+import {Stack} from "./stack";
 import {ElementStates} from "../../types/element-states";
 import {setDelay} from "../../utils/set-delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";

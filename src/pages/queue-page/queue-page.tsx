@@ -6,7 +6,7 @@ import {Button} from "../../components/ui/button/button";
 import {Circle} from "../../components/ui/circle/circle";
 import {ICircleDetail} from "../../types/types";
 import {ElementStates} from "../../types/element-states";
-import Queue from "../../utils/queue";
+import Queue from "./queue";
 import {setDelay} from "../../utils/set-delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 

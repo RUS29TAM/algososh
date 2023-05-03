@@ -1,4 +1,4 @@
-import {ElementStates} from "../types/element-states";
+import {ElementStates} from "../../types/element-states";
 /**
  * array - генерирует случайный массив элементов
  * @param minLenght - минимальная длина массива

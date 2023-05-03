@@ -10,7 +10,7 @@ import {ElementStates} from "../../types/element-states";
 import {setDelay} from "../../utils/set-delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 import {swapArrayDetails} from "../../utils/swap-array-details";
-import {array} from "../../utils/get-array";
+import {array} from "./get-array";
 
 type TSortingPageState = {
     isIncreasing: boolean;
