@@ -5,6 +5,7 @@ export interface ICircleDetail {
     state: ElementStates;
     head?: string;
     characters?: string | null;
+    tail?: string;
 }
 
 export interface IColumn {
