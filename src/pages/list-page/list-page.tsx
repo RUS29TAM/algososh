@@ -39,7 +39,7 @@ export const ListPage: React.FC = () => {
         }, [initialArray, initialState]);
 
         const inLoading = useMemo<boolean>(() => !!Object.values(stateList).find((element) => element), [stateList])
-        const addHead = async () => {
+        const addHead = async () => {//добавить элемент в голову массива
             setStateList({...stateList, isAddHead: true});//разворачиваем стейт блокируем кнопку
             const array = [...arrayCharacters];//определяем масссив
             linkedList.prepend(inputValue);//вставляем в начало элемента другой элемент.
@@ -54,7 +54,7 @@ export const ListPage: React.FC = () => {
             setStateList({...stateList, isAddHead: false})//разворачиваем стейт разблокируем блокируем кнопку
             setInputValue('')//очищаем инпут
         }
-        const addTail = async () => {
+        const addTail = async () => {//добавить элемент в хвост массива
             setStateList({...stateList, isDeleteTail: true})//разворачиваем стейт блокируем кнопку
             const array = [...arrayCharacters];//определяем масссив
             linkedList.append(inputValue);//вставляем в конец элемента другой элемент.
@@ -80,7 +80,7 @@ export const ListPage: React.FC = () => {
             setStateList({...stateList, isAddTail: false})//разворачиваем стейт разблокируем блокируем кнопку
             setInputValue('')//очищаем инпут
         }
-        const deleteHead = async () => {
+        const deleteHead = async () => {//удалить головной элемент из массива
             setStateList({...stateList, isDeleteHead: true})//разворачиваем стейт блокируем кнопку
             const array = [...arrayCharacters]//определяем масссив
             array[0] = {...array[0], characters: '', delete: true, extra: {characters: linkedList.deleteHead() || ''}}//определяем элемент в начале массива который удаляем визуализируем `extra` изменения
@@ -92,6 +92,26 @@ export const ListPage: React.FC = () => {
             await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
             array[0].state = ElementStates.Default//возвращаем начальное визуальное состояние отображаемых элементов
             setStateList({...stateList, isDeleteHead: false})//разворачиваем стейт разблокируем блокируем кнопку
+            setInputValue('')//очищаем инпут
+        }
+        const deleteTail = async () => {//удалить элемент из хвоста массива
+            setStateList({...stateList, isDeleteTail: true})//разворачиваем стейт блокируем кнопку
+            const array = [...arrayCharacters]//определяем масссив
+            const {length} = array
+            array[length - 1] = {//определяем элемент в хвосте массива который удаляем визуализируем `extra` изменения
+                ...array[length - 1],
+                characters: '',
+                delete: true,
+                extra: {characters: linkedList.deleteTail() || ''}
+            }
+            setArrayCharacters([...array])//рендерим массив и элемент
+            await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            array.pop()//удаляем последний элемент из массива.
+            array[length - 2].state = ElementStates.Modified//красим зеленым элемент который становиться хвостом
+            setArrayCharacters([...array])//рендерим массив и элемент
+            await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            array[length - 2].state = ElementStates.Default//возвращаем начальное визуальное состояние отображаемых элементов
+            setStateList({...stateList, isDeleteTail: false})//разворачиваем стейт разблокируем блокируем кнопку
             setInputValue('')//очищаем инпут
         }
 
@@ -142,7 +162,11 @@ export const ListPage: React.FC = () => {
                                 <Button type={'button'}
                                         text={'Удалить из tail'}
                                         style={{width: 175}}
-                                        />
+                                        onClick={() => deleteTail()}
+                                        isLoader={stateList.isDeleteTail}
+                                        disabled={arrayCharacters.length === 0 || inLoading}
+
+                                />
                             </div>
                         </section>
                     </div>
