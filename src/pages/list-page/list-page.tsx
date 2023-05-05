@@ -135,6 +135,31 @@ export const ListPage: React.FC = () => {
             setInputValue('')//очищаем инпут для вода элемента
             setInputValueIndex(undefined)//очищаем инпут для ввода индекса
         }
+        const deleteByIndex = async (index: number) => {//Удалить элемент в массиве по индексу
+            setStateList({...stateList, isDeleteByIndex: true})//разворачиваем стейт блокируем кнопку
+            const array = [...arrayCharacters]//определяем масссив
+            for (let i = 0; i <= index; i++) {
+                array[i].state = ElementStates.Changing//красим отображаемый массив розовым пока цикл не завершится
+                i === index ? array[i].arrow = true : array[i].arrow = false//красим стрелку в розовый только до элемента который удаляется
+                setArrayCharacters([...array])//разворачиваем массив с новым элементом
+                await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            }
+            array[index] = {//показываем `extra` для удаляемого элемента когда цикл завершился
+                ...array[index],
+                characters: '',
+                delete: true,
+                extra: {characters: linkedList.deleteByIndex(index) || ''}
+            }
+            setArrayCharacters([...array])//разворачиваем стейт разблокируем блокируем кнопку
+            await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            array.splice(index, 1)//первым параметром находим элемент по индексу и вторым параметром мы указываем сколько элементов необходимо удалить
+            setArrayCharacters([...array])//разворачиваем массив с новым элементом
+            await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            array.forEach((element) => (element.state = ElementStates.Default))//пробегаемся по элементам и возвращаем для них начальное визуальное состояние
+            setStateList({...stateList, isDeleteByIndex: false})//разворачиваем стейт блокируем кнопку
+            setInputValue('')//очищаем инпут для вода элемента
+            setInputValueIndex(undefined)//очищаем инпут для ввода индекса
+        }
 
         const onChange = (e: FormEvent<HTMLInputElement>) => {
             setInputValue(e.currentTarget.value)
@@ -186,6 +211,7 @@ export const ListPage: React.FC = () => {
                                         onClick={() => deleteTail()}
                                         isLoader={stateList.isDeleteTail}
                                         disabled={arrayCharacters.length === 0 || inLoading}
+
                                 />
                             </div>
                         </section>
@@ -211,7 +237,10 @@ export const ListPage: React.FC = () => {
                             <Button type={'button'}
                                     text={'Удалить по индексу'}
                                     style={{width: 362}}
-                                    />
+                                    onClick={() => inputValueIndex && deleteByIndex(inputValueIndex)}
+                                    isLoader={stateList.isDeleteByIndex}
+                                    disabled={!inputValueIndex || arrayCharacters.length === 1 || inputValueIndex > arrayCharacters.length - 1 || inLoading}
+                            />
                         </section>
                     </div>
                 </div>
@@ -227,7 +256,8 @@ export const ListPage: React.FC = () => {
                                 />
                                 {index !== arrayCharacters.length - 1 && (
                                     <ArrowIcon
-                                        fill={characters.state === ElementStates.Changing && !characters.arrow ? '#d252e1' : '#0032FF'}/>
+                                        fill={characters.state === ElementStates.Changing && !characters.arrow ? '#d252e1' : '#0032FF'}
+                                    />
                                 )}
                                 {characters.add && (
                                     <Circle letter={characters.extra?.characters}
@@ -246,10 +276,7 @@ export const ListPage: React.FC = () => {
                             </li>
                         )
                     })}
-
                 </ol>
-
             </SolutionLayout>
         );
-    }
-;
+    };
