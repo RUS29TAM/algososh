@@ -4,7 +4,7 @@ import style from "./list-page.module.css";
 import {Button} from "../../components/ui/button/button";
 import {Input} from "../../components/ui/input/input";
 import {randomChar} from "../../utils/random-char";
-import {LinkedList} from "./linked-list-node";
+import {LinkedList} from "./utils/linked-list-node";
 import {ElementStates} from "../../types/element-states";
 import {setDelay} from "../../utils/set-delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
