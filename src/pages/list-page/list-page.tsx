@@ -12,7 +12,8 @@ import {Circle} from "../../components/ui/circle/circle";
 import {ArrowIcon} from "../../components/ui/icons/arrow-icon";
 import {TLinkedListElement} from "../../types/t-linked-list-element";
 import {ICircleDetail} from "../../interfaces/i-circle-detail";
-//def
+
+
 export const ListPage: React.FC = () => {
         const [inputValue, setInputValue] = useState<string>('')
         const [inputValueIndex, setInputValueIndex] = useState<number>()
@@ -79,6 +80,20 @@ export const ListPage: React.FC = () => {
             setStateList({...stateList, isAddTail: false})//разворачиваем стейт разблокируем блокируем кнопку
             setInputValue('')//очищаем инпут
         }
+        const deleteHead = async () => {
+            setStateList({...stateList, isDeleteHead: true})//разворачиваем стейт блокируем кнопку
+            const array = [...arrayCharacters]//определяем масссив
+            array[0] = {...array[0], characters: '', delete: true, extra: {characters: linkedList.deleteHead() || ''}}//определяем элемент в начале массива который удаляем визуализируем `extra` изменения
+            setArrayCharacters([...array])//рендерим массив и элемент
+            await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            array.shift() //удаляем первый элемент массива
+            array[0].state = ElementStates.Modified // красим зеленым
+            setArrayCharacters([...array])//рендерим массив и элемент
+            await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            array[0].state = ElementStates.Default//возвращаем начальное визуальное состояние отображаемых элементов
+            setStateList({...stateList, isDeleteHead: false})//разворачиваем стейт разблокируем блокируем кнопку
+            setInputValue('')//очищаем инпут
+        }
 
         const onChange = (e: FormEvent<HTMLInputElement>) => {
             setInputValue(e.currentTarget.value)
@@ -120,11 +135,14 @@ export const ListPage: React.FC = () => {
                                 <Button type={'button'}
                                         text={'Удалить из head'}
                                         style={{width: 175}}
+                                        onClick={() => deleteHead()}
+                                        isLoader={stateList.isDeleteHead}
+                                        disabled={arrayCharacters.length === 0 || inLoading}
                                 />
                                 <Button type={'button'}
                                         text={'Удалить из tail'}
                                         style={{width: 175}}
-                                />
+                                        />
                             </div>
                         </section>
                     </div>
@@ -142,11 +160,11 @@ export const ListPage: React.FC = () => {
                             <Button type={'button'}
                                     text={'Добавить по индексу'}
                                     style={{width: 362}}
-                            />
+                                    />
                             <Button type={'button'}
                                     text={'Удалить по индексу'}
                                     style={{width: 362}}
-                            />
+                                    />
                         </section>
                     </div>
                 </div>
@@ -181,7 +199,9 @@ export const ListPage: React.FC = () => {
                             </li>
                         )
                     })}
+
                 </ol>
+
             </SolutionLayout>
         );
     }
