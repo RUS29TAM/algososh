@@ -1,0 +1,44 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 952px;
+    margin: 0 auto;
+}
+
+.container {
+    display: flex;
+}
+
+.btn {
+    display: flex;
+    gap: 12px;
+}
+
+.elements {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 90px 0 0;
+    margin: 0;
+    gap: 16px;
+}
+
+.elementsWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.top {
+    position: absolute;
+    top: -60px;
+    left: 10px;
+}
+
+.bottom {
+    position: absolute;
+    top: 115px;
+    left: 12px;
+}
