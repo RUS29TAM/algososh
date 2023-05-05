@@ -12,7 +12,7 @@ import {Circle} from "../../components/ui/circle/circle";
 import {ArrowIcon} from "../../components/ui/icons/arrow-icon";
 import {TLinkedListElement} from "../../types/t-linked-list-element";
 import {ICircleDetail} from "../../interfaces/i-circle-detail";
-
+//def
 export const ListPage: React.FC = () => {
         const [inputValue, setInputValue] = useState<string>('')
         const [inputValueIndex, setInputValueIndex] = useState<number>()
@@ -46,13 +46,40 @@ export const ListPage: React.FC = () => {
             setArrayCharacters([...array]);//разворачиваем массив с новым элементом
             await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
             array[0] = {...array[0], add: false, extra: undefined};//убираем визуализацию предыдущего действия
-            array.unshift({characters: linkedList.getNodeByIndex(0) || '', state: ElementStates.Modified})//добавляем элемент в начало массива визуализируем изменения
+            array.unshift({characters: linkedList.getNodeByIndex(0) || '', state: ElementStates.Modified})//добавляем элемент в начало массива визуализируем изменения зеленым цветом
             setArrayCharacters([...array])//разворачиваем массив с новым элементом
             await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
             array[0].state = ElementStates.Default;//возвращаем начальное визуальное состояние отображаемых элементов
             setStateList({...stateList, isAddHead: false})//разворачиваем стейт разблокируем блокируем кнопку
             setInputValue('')//очищаем инпут
         }
+        const addTail = async () => {
+            setStateList({...stateList, isDeleteTail: true})//разворачиваем стейт блокируем кнопку
+            const array = [...arrayCharacters];//определяем масссив
+            linkedList.append(inputValue);//вставляем в конец элемента другой элемент.
+            const tailIndex = linkedList.sizeList() - 1//определяем место для нового элемента в конце массива
+            for (let i = 0; i <= tailIndex; i++) {
+                array[i] = {...array[i], add: true, extra: {characters: linkedList.getNodeByIndex(tailIndex) || ''}}//визуализируем - 'extra' как процесс добавления элемента над отображаемым массивом пока цикл не завершится
+                if (i > 0) {
+                    array[i - 1] = {...array[i - 1], add: false, extra: undefined, state: ElementStates.Changing}//убираем - 'extra' после каждой итерации, отображаем визуализацию сомого массива розовым цветом пока цикл не завершится и элемент не встанет на свое место.
+                }
+                setArrayCharacters([...array])//разворачиваем массив с новым элементом
+                await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            }
+            array[array.length - 1] = {//добавить элемент в хвост массива
+                ...array[array.length],
+                characters: linkedList.getNodeByIndex(tailIndex) || '',
+                state: ElementStates.Modified,// подсветить зеленым, скрыть 'extra`
+                add: false,
+                extra: undefined
+            }
+            setArrayCharacters([...array]) //рендерим массив с новым элементом
+            await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            array.forEach((element) => (element.state = ElementStates.Default))//возвращаем начальное визуальное состояние отображаемых элементов
+            setStateList({...stateList, isAddTail: false})//разворачиваем стейт разблокируем блокируем кнопку
+            setInputValue('')//очищаем инпут
+        }
+
         const onChange = (e: FormEvent<HTMLInputElement>) => {
             setInputValue(e.currentTarget.value)
         }
@@ -86,6 +113,9 @@ export const ListPage: React.FC = () => {
                                 <Button type={'button'}
                                         text={'Добавить в tail'}
                                         style={{width: 175}}
+                                        onClick={() => addTail()}
+                                        isLoader={stateList.isAddTail}
+                                        disabled={!inputValue || inLoading}
                                 />
                                 <Button type={'button'}
                                         text={'Удалить из head'}
