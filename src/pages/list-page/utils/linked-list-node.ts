@@ -1,4 +1,4 @@
-import {ILinkedList} from "../../interfaces/i-linked-list";
+import {ILinkedList} from "../../../interfaces/i-linked-list";
 
 class LinkedListNode<T> {
     value: T;
