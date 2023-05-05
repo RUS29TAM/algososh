@@ -39,7 +39,7 @@ export const ListPage: React.FC = () => {
         }, [initialArray, initialState]);
 
         const inLoading = useMemo<boolean>(() => !!Object.values(stateList).find((element) => element), [stateList])
-        const addHead = async () => {//добавить элемент в голову массива
+        const addHead = async () => {//Добавить элемент в голову массива
             setStateList({...stateList, isAddHead: true});//разворачиваем стейт блокируем кнопку
             const array = [...arrayCharacters];//определяем масссив
             linkedList.prepend(inputValue);//вставляем в начало элемента другой элемент.
@@ -54,7 +54,7 @@ export const ListPage: React.FC = () => {
             setStateList({...stateList, isAddHead: false})//разворачиваем стейт разблокируем блокируем кнопку
             setInputValue('')//очищаем инпут
         }
-        const addTail = async () => {//добавить элемент в хвост массива
+        const addTail = async () => {//Добавить элемент в хвост массива
             setStateList({...stateList, isDeleteTail: true})//разворачиваем стейт блокируем кнопку
             const array = [...arrayCharacters];//определяем масссив
             linkedList.append(inputValue);//вставляем в конец элемента другой элемент.
@@ -114,6 +114,27 @@ export const ListPage: React.FC = () => {
             setStateList({...stateList, isDeleteTail: false})//разворачиваем стейт разблокируем блокируем кнопку
             setInputValue('')//очищаем инпут
         }
+        const addByIndex = async (index: number) => {//Добавить элемент в массив по индексу
+            setStateList({...stateList, isAddByIndex: true})//разворачиваем стейт блокируем кнопку
+            const array = [...arrayCharacters]//определяем масссив
+            linkedList.addByIndex(inputValue, index)//вставляем элемент в другой по индексу.
+            for (let i = 0; i <= index; i++) {//визуализируем - 'extra' как процесс добавления элемента над отображаемым массивом пока цикл не завершится
+                array[i] = {...array[i], add: true, extra: {characters: linkedList.getNodeByIndex(index) || ''}}
+                if (i > 0) {//убираем - 'extra' после каждой итерации, отображаем визуализацию сомого массива розовым цветом пока цикл не завершится и элемент не встанет на свое место.
+                    array[i - 1] = {...array[i - 1], add: false, extra: undefined, state: ElementStates.Changing}
+                }
+                setArrayCharacters([...array])//разворачиваем массив с новым элементом
+                await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            }
+            array[index] = {...array[index], add: false, extra: undefined}//убираем - 'extra' после завершения цикла
+            array.splice(index, 0, {characters: linkedList.getNodeByIndex(index) || '', state: ElementStates.Modified})//так-как вторым параметром мы ставим ноль, то элемент добавиться в массив по индексу, красим зеленым элемент в массиве
+            setArrayCharacters([...array])//рендерим массив и элемент
+            await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
+            array.forEach((element) => (element.state = ElementStates.Default))//пробегаемся по элементам и возвращаем для них начальное визуальное состояние
+            setStateList({...stateList, isAddByIndex: false})//разворачиваем стейт разблокируем блокируем кнопку
+            setInputValue('')//очищаем инпут для вода элемента
+            setInputValueIndex(undefined)//очищаем инпут для ввода индекса
+        }
 
         const onChange = (e: FormEvent<HTMLInputElement>) => {
             setInputValue(e.currentTarget.value)
@@ -165,7 +186,6 @@ export const ListPage: React.FC = () => {
                                         onClick={() => deleteTail()}
                                         isLoader={stateList.isDeleteTail}
                                         disabled={arrayCharacters.length === 0 || inLoading}
-
                                 />
                             </div>
                         </section>
@@ -184,7 +204,10 @@ export const ListPage: React.FC = () => {
                             <Button type={'button'}
                                     text={'Добавить по индексу'}
                                     style={{width: 362}}
-                                    />
+                                    onClick={() => inputValueIndex && addByIndex(inputValueIndex)}
+                                    disabled={!inputValue || !inputValueIndex || arrayCharacters.length > maxLength || inputValueIndex > arrayCharacters.length - 1 || inLoading}
+                                    isLoader={stateList.isAddByIndex}
+                            />
                             <Button type={'button'}
                                     text={'Удалить по индексу'}
                                     style={{width: 362}}
