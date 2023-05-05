@@ -4,11 +4,11 @@ import style from './string-page.module.css'
 import {Input} from "../../components/ui/input/input";
 import {Button} from "../../components/ui/button/button";
 import {ElementStates} from "../../types/element-states";
-import {ICircleDetail} from "../../types/types";
 import {DELAY_IN_MS} from "../../constants/delays";
 import {Circle} from "../../components/ui/circle/circle";
 import {setDelay} from "../../utils/set-delay";
 import {swapArrayDetails} from "../../utils/swap-array-details";
+import {ICircleDetail} from "../../interfaces/i-circle-detail";
 
 export const StringComponent: React.FC = () => {
     const [inputValue, setInputValue] = useState('')

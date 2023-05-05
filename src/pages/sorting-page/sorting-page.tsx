@@ -4,7 +4,7 @@ import {RadioInput} from "../../components/ui/radio-input/radio-input";
 import {Button} from "../../components/ui/button/button";
 import {Direction} from "../../types/direction";
 import style from "../sorting-page/sorting-page.module.css";
-import {IColumn} from "../../types/types";
+import {IColumn} from "../../interfaces/i-column";
 import {Column} from "../../components/ui/column/column";
 import {ElementStates} from "../../types/element-states";
 import {setDelay} from "../../utils/set-delay";

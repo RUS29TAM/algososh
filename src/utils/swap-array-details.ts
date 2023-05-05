@@ -1,4 +1,5 @@
-import {ICircleDetail, IColumn} from "../types/types";
+import {IColumn} from "../interfaces/i-column";
+import {ICircleDetail} from "../interfaces/i-circle-detail";
 
 /**
  * swapArrayDetails - меняет местами элементы массива
