@@ -12,7 +12,7 @@ import {Circle} from "../../components/ui/circle/circle";
 import {ArrowIcon} from "../../components/ui/icons/arrow-icon";
 import {TLinkedListElement} from "../../types/t-linked-list-element";
 import {ICircleDetail} from "../../interfaces/i-circle-detail";
-
+import {nanoid} from "nanoid";
 
 export const ListPage: React.FC = () => {
         const [inputValue, setInputValue] = useState<string>('')
@@ -247,7 +247,7 @@ export const ListPage: React.FC = () => {
                 <ol className={style.elements}>
                     {arrayCharacters.map((characters, index) => {
                         return (
-                            <li key={index} className={style.elementsWrapper}>
+                            <li key={nanoid()} className={style.elementsWrapper}>
                                 <Circle letter={characters.characters}
                                         index={index}
                                         state={characters.state}

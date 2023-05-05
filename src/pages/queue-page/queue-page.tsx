@@ -9,6 +9,7 @@ import Queue from "./utils/queue";
 import {setDelay} from "../../utils/set-delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 import {ICircleDetail} from "../../interfaces/i-circle-detail";
+import {nanoid} from "nanoid";
 
 export const QueuePage: React.FC = () => {
 
@@ -115,7 +116,7 @@ export const QueuePage: React.FC = () => {
             <ol className={style.string} style={{flexWrap: "nowrap", paddingTop: 48}}>
                 {arrayCharacters.map((characters, index) => {
                     return (
-                        <li key={index}>
+                        <li key={nanoid()}>
                             <Circle
                                 letter={characters.characters}
                                 index={index}

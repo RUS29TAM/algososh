@@ -9,6 +9,7 @@ import {Circle} from "../../components/ui/circle/circle";
 import {setDelay} from "../../utils/set-delay";
 import {swapArrayDetails} from "../../utils/swap-array-details";
 import {ICircleDetail} from "../../interfaces/i-circle-detail";
+import {nanoid} from "nanoid";
 
 export const StringComponent: React.FC = () => {
     const [inputValue, setInputValue] = useState('')
@@ -97,9 +98,9 @@ export const StringComponent: React.FC = () => {
                 </Button>
             </form>
             <ol className={style.string} style={{flexWrap: "nowrap"}}>
-                {arrayCharacters.map((characters: ICircleDetail, index: number) => {
+                {arrayCharacters.map((characters: ICircleDetail) => {
                     return (
-                        <li key={index}>
+                        <li key={nanoid()}>
                             <Circle letter={characters.symbol} state={characters.state}/>
                         </li>
                     )

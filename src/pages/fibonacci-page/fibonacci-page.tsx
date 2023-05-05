@@ -7,6 +7,7 @@ import {Circle} from "../../components/ui/circle/circle";
 import {setDelay} from "../../utils/set-delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 import {getFibArray} from "./utils/get-fib-array";
+import {nanoid} from "nanoid";
 
 export const FibonacciPage: React.FC = () => {
     const [inputValue, setInputValue] = useState<number>()
@@ -74,7 +75,7 @@ export const FibonacciPage: React.FC = () => {
             <ol className={style.string} style={{paddingTop: 48}}>
                 {arrayNum.map((number:number, index:number) => {
                     return (
-                        <li key={index}>
+                        <li key={nanoid()}>
                             <Circle letter={number.toString()} index={index}/>
                         </li>
                     )

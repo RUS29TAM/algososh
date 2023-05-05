@@ -12,6 +12,7 @@ import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 import {swapArrayDetails} from "../../utils/swap-array-details";
 import {array} from "./utils/get-array";
 import {TSortingPageState} from "../../types/t-sorting-page-state";
+import {nanoid} from "nanoid";
 
 export const SortingPage: React.FC = () => {
 
@@ -196,9 +197,9 @@ export const SortingPage: React.FC = () => {
                 </div>
             </section>
             <ol className={style.diagram}>
-                {initialArray.map((element, index) => {
+                {initialArray.map((element) => {
                     return (
-                        <li key={index}>
+                        <li key={nanoid()}>
                             <Column index={element.number} state={element.state}/>
                         </li>
                     )
