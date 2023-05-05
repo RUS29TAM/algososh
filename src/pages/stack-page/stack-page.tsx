@@ -9,6 +9,7 @@ import {ElementStates} from "../../types/element-states";
 import {setDelay} from "../../utils/set-delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 import {ICircleDetail} from "../../interfaces/i-circle-detail";
+import {nanoid} from "nanoid";
 
 export const StackPage: React.FC = () => {
     const [inputValue, setInputValue] = useState('')
@@ -63,6 +64,9 @@ export const StackPage: React.FC = () => {
             arrayCharacters[arrayCharacters.length - 1].head = 'top'; //меняем стейт для для головы
             arrayCharacters[arrayCharacters.length - 1].state = ElementStates.Changing;//визуализируем изменения
             setArrayCharacters([...arrayCharacters])//разворачиваем массив
+            await setDelay(SHORT_DELAY_IN_MS);//устанавливаем задержку визуализации
+            arrayCharacters[arrayCharacters.length - 1].state = ElementStates.Default;//возвращаем дефолтное состояние
+            setArrayCharacters([...arrayCharacters]);//разворачиваем массив
         } else {
             setArrayCharacters([])//или возвращаем пустой массив
         }
@@ -111,7 +115,7 @@ export const StackPage: React.FC = () => {
             <ol className={style.string} style={{flexWrap: "nowrap", paddingTop: 48}}>
                 {arrayCharacters.map((characters, index) => {
                     return (
-                        <li key={index}>
+                        <li key={nanoid()}>
                             <Circle
                                 letter={characters.characters}
                                 index={index}
