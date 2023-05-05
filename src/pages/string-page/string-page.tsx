@@ -38,30 +38,29 @@ export const StringComponent: React.FC = () => {
         await setDelay();
 
         for (
-            let array = arrayElements, start = 0, end = array.length - 1; // -1 => предотвращаем ошибку ограждения элементов, известную как «выход за один».
-            end >= start;
-            start++, end--
+            let array = arrayElements, start = 0, end = array.length - 1; // -1 => предотвращаем ошибку ограждения элементов, известную как «выход за один». Определяем начало и конец в массиве
+            end >= start; //хвост должен быть больше или равен голове
+            start++, end--//услтанавливаем оператор приращения и уменьшения
         ) {
-            if (end === start) {
-                array[start].state = ElementStates.Modified;
-                setArrayCharacters([...array]);
-                await setDelay(DELAY_IN_MS);
-                settingLoading(false);
+            if (end === start) {//после завершения
+                array[start].state = ElementStates.Modified;//красим зеленым
+                setArrayCharacters([...array]);//рендерим массив
+                await setDelay(DELAY_IN_MS);//устанавдиваем задержку
+                settingLoading(false);//разблокируем кнопку
             } else {//визуализируем действие
-                array[start].state = ElementStates.Changing;
-                array[end].state = ElementStates.Changing;
-                setArrayCharacters([...array]);
-                await setDelay(DELAY_IN_MS)
-                //расставляяем элементы
-                swapArrayDetails(array, start, end);
+                array[start].state = ElementStates.Changing;//красим розовым
+                array[end].state = ElementStates.Changing;//красим розовым
+                setArrayCharacters([...array]);//рендерим массив
+                await setDelay(DELAY_IN_MS)//устанавдиваем задержку
+                swapArrayDetails(array, start, end);//меняем местами элементы массива
                 //визуализируем действие
-                array[start].state = ElementStates.Modified;
-                array[end].state = ElementStates.Modified;
-                setArrayCharacters([...array]);
-                await setDelay(DELAY_IN_MS)
+                array[start].state = ElementStates.Modified;//красим зеленым
+                array[end].state = ElementStates.Modified;//красим зеленым
+                setArrayCharacters([...array]);//рендерим массив
+                await setDelay(DELAY_IN_MS)//устанавдиваем задержку
             }
         }
-        settingLoading(false);
+        settingLoading(false);//разблокируем кнопку
     }
 
     /**

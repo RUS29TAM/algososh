@@ -24,17 +24,6 @@ export const SortingPage: React.FC = () => {
         isLoading: false,
     })
 
-    // function generateRandomArray(length: number, max: number): number[] {
-    //     let arr: number[] = [];
-    //     for (let i = 0; i < length; i++) {
-    //         arr.push(Math.floor(Math.random() * max));
-    //     }
-    //     return arr;
-    // }
-    //
-    // const randomArray = generateRandomArray(5, 10);
-    //
-
     const createArray = () => {//создадим массив с параметрами
         setInitialArray([...array(3, 17, 100)])
     }

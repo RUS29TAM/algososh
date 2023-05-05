@@ -42,15 +42,15 @@ export const FibonacciPage: React.FC = () => {
         settingLoading: Dispatch<SetStateAction<boolean>>
     ) => {
         settingInputValues(0)
-        settingLoading(true);
-        const resultArray =[...getFibArray(inputValue)]
-        const renderResultArray: number[] = [];
+        settingLoading(true);//блокируем кнопку
+        const resultArray = [...getFibArray(inputValue)]//вычисляем последовательность числел в введенных значениях и прогоняем через функцию Фиббоначи
+        const renderResultArray: number[] = []; //создаем результирующий массив
         for(let element of resultArray) {
-            renderResultArray.push(element)
-            settingArrayNum([...renderResultArray])
-            await setDelay(SHORT_DELAY_IN_MS)
+            renderResultArray.push(element)//вставляем елемент в результирующий массив
+            settingArrayNum([...renderResultArray])//оррисовываем
+            await setDelay(SHORT_DELAY_IN_MS)//устанавливаем задержку
         }
-        settingLoading(false)
+        settingLoading(false)//разблокируем кнопку
     }
 
     return (

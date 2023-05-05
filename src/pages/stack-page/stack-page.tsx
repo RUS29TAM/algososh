@@ -4,7 +4,7 @@ import style from "../string-page/string-page.module.css";
 import {Input} from "../../components/ui/input/input";
 import {Button} from "../../components/ui/button/button";
 import {Circle} from "../../components/ui/circle/circle";
-import {Stack} from "./stack";
+import {Stack} from "./utils/stack";
 import {ElementStates} from "../../types/element-states";
 import {setDelay} from "../../utils/set-delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
