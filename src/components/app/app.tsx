@@ -8,7 +8,7 @@ import { StringComponent } from "../../pages/string-page/string-page";
 import { SortingPage } from "../../pages/sorting-page/sorting-page";
 import { StackPage } from "../../pages/stack-page/stack-page";
 
-import "./app.css";
+import "./app.module.css";
 
 function App() {
   return (
