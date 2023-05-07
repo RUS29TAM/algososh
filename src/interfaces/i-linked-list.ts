@@ -6,4 +6,6 @@ export interface ILinkedList<T> {
     deleteHead: () => T | null
     deleteTail: () => T | null
     toArray: () => void
+    getNodeByIndex: (index: number) => T | null
+    sizeList: () => number
 }
