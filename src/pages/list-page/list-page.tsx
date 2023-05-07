@@ -16,7 +16,7 @@ import {nanoid} from "nanoid";
 
 export const ListPage: React.FC = () => {
         const [inputValue, setInputValue] = useState<string>('')
-        const [inputValueIndex, setInputValueIndex] = useState<number>()
+        const [inputValueIndex, setInputValueIndex] = useState<string>('')
         const [arrayCharacters, setArrayCharacters] = useState<ICircleDetail[]>([])
         const [stateList, setStateList] = useState<TLinkedListElement>({
             isAddByIndex: false,
@@ -55,7 +55,7 @@ export const ListPage: React.FC = () => {
             setInputValue('')//очищаем инпут
         }
         const addTail = async () => {//Добавить элемент в хвост массива
-            setStateList({...stateList, isDeleteTail: true})//разворачиваем стейт блокируем кнопку
+            setStateList({...stateList, isAddTail: true})//разворачиваем стейт блокируем кнопку
             const array = [...arrayCharacters];//определяем масссив
             linkedList.append(inputValue);//вставляем в конец элемента другой элемент.
             const tailIndex = linkedList.sizeList() - 1//определяем место для нового элемента в конце массива
@@ -114,58 +114,58 @@ export const ListPage: React.FC = () => {
             setStateList({...stateList, isDeleteTail: false})//разворачиваем стейт разблокируем блокируем кнопку
             setInputValue('')//очищаем инпут
         }
-        const addByIndex = async (index: number) => {//Добавить элемент в массив по индексу
+        const addByIndex = async (index: string) => {//Добавить элемент в массив по индексу
             setStateList({...stateList, isAddByIndex: true})//разворачиваем стейт блокируем кнопку
             const array = [...arrayCharacters]//определяем масссив
-            linkedList.addByIndex(inputValue, index)//вставляем элемент в другой по индексу.
-            for (let i = 0; i <= index; i++) {//визуализируем - 'extra' как процесс добавления элемента над отображаемым массивом пока цикл не завершится
-                array[i] = {...array[i], add: true, extra: {characters: linkedList.getNodeByIndex(index) || ''}}
+            linkedList.addByIndex(inputValue, Number(index))//вставляем элемент в другой по индексу.
+            for (let i = 0; i <= Number(index); i++) {//визуализируем - 'extra' как процесс добавления элемента над отображаемым массивом пока цикл не завершится
+                array[i] = {...array[i], add: true, extra: {characters: linkedList.getNodeByIndex(Number(index)) || ''}}
                 if (i > 0) {//убираем - 'extra' после каждой итерации, отображаем визуализацию сомого массива розовым цветом пока цикл не завершится и элемент не встанет на свое место.
                     array[i - 1] = {...array[i - 1], add: false, extra: undefined, state: ElementStates.Changing}
                 }
                 setArrayCharacters([...array])//разворачиваем массив с новым элементом
                 await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
             }
-            array[index] = {...array[index], add: false, extra: undefined}//убираем - 'extra' после завершения цикла
-            array.splice(index, 0, {characters: linkedList.getNodeByIndex(index) || '', state: ElementStates.Modified})//так-как вторым параметром мы ставим ноль, то элемент добавиться в массив по индексу, красим зеленым элемент в массиве
+            array[Number(index)] = {...array[Number(index)], add: false, extra: undefined}//убираем - 'extra' после завершения цикла
+            array.splice(Number(index), 0, {characters: linkedList.getNodeByIndex(Number(index)) || '', state: ElementStates.Modified})//так-как вторым параметром мы ставим ноль, то элемент добавиться в массив по индексу, красим зеленым элемент в массиве
             setArrayCharacters([...array])//рендерим массив и элемент
             await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
             array.forEach((element) => (element.state = ElementStates.Default))//пробегаемся по элементам и возвращаем для них начальное визуальное состояние
             setStateList({...stateList, isAddByIndex: false})//разворачиваем стейт разблокируем блокируем кнопку
             setInputValue('')//очищаем инпут для вода элемента
-            setInputValueIndex(undefined)//очищаем инпут для ввода индекса
+            setInputValueIndex('')//очищаем инпут для ввода индекса
         }
-        const deleteByIndex = async (index: number) => {//Удалить элемент в массиве по индексу
+        const deleteByIndex = async (index: string) => {//Удалить элемент в массиве по индексу
             setStateList({...stateList, isDeleteByIndex: true})//разворачиваем стейт блокируем кнопку
             const array = [...arrayCharacters]//определяем масссив
-            for (let i = 0; i <= index; i++) {
+            for (let i = 0; i <= Number(index); i++) {
                 array[i].state = ElementStates.Changing//красим отображаемый массив розовым пока цикл не завершится
-                i === index ? array[i].arrow = true : array[i].arrow = false//красим стрелку в розовый только до элемента который удаляется
+                i === Number(index) ? array[i].arrow = true : array[i].arrow = false//красим стрелку в розовый только до элемента который удаляется
                 setArrayCharacters([...array])//разворачиваем массив с новым элементом
                 await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
             }
-            array[index] = {//показываем `extra` для удаляемого элемента когда цикл завершился
-                ...array[index],
+            array[Number(index)] = {//показываем `extra` для удаляемого элемента когда цикл завершился
+                ...array[Number(index)],
                 characters: '',
                 delete: true,
-                extra: {characters: linkedList.deleteByIndex(index) || ''}
+                extra: {characters: linkedList.deleteByIndex(Number(index)) || ''}
             }
             setArrayCharacters([...array])//разворачиваем стейт разблокируем блокируем кнопку
             await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
-            array.splice(index, 1)//первым параметром находим элемент по индексу и вторым параметром мы указываем сколько элементов необходимо удалить
+            array.splice(Number(index), 1)//первым параметром находим элемент по индексу и вторым параметром мы указываем сколько элементов необходимо удалить
             setArrayCharacters([...array])//разворачиваем массив с новым элементом
             await setDelay(SHORT_DELAY_IN_MS)//устаначливаем задержку
             array.forEach((element) => (element.state = ElementStates.Default))//пробегаемся по элементам и возвращаем для них начальное визуальное состояние
             setStateList({...stateList, isDeleteByIndex: false})//разворачиваем стейт блокируем кнопку
             setInputValue('')//очищаем инпут для вода элемента
-            setInputValueIndex(undefined)//очищаем инпут для ввода индекса
+            setInputValueIndex('')//очищаем инпут для ввода индекса
         }
 
         const onChange = (e: FormEvent<HTMLInputElement>) => {
             setInputValue(e.currentTarget.value)
         }
         const onChangeIndex = (e: FormEvent<HTMLInputElement>) => {
-            setInputValueIndex(Number(e.currentTarget.value))
+            setInputValueIndex(e.currentTarget.value)
         }
 
         return (
@@ -218,9 +218,10 @@ export const ListPage: React.FC = () => {
                     </div>
                     <div className={style.container}>
                         <Input value={inputValueIndex || ''}
-                               type={'text'}
+                               type={'number'}
                                onChange={onChangeIndex}
-                               maxLength={1}
+                               min={0}
+                               max={arrayCharacters.length - 1}
                                style={{width: 204, marginRight: 12}}
                                placeholder={'Введите  индекс'}
                                disabled={inLoading}
@@ -231,7 +232,7 @@ export const ListPage: React.FC = () => {
                                     text={'Добавить по индексу'}
                                     style={{width: 362}}
                                     onClick={() => inputValueIndex && addByIndex(inputValueIndex)}
-                                    disabled={!inputValue || !inputValueIndex || arrayCharacters.length > maxLength || inputValueIndex > arrayCharacters.length - 1 || inLoading}
+                                    disabled={!inputValue || !inputValueIndex || arrayCharacters.length > maxLength || inLoading || Number(inputValueIndex) > arrayCharacters.length - 1}
                                     isLoader={stateList.isAddByIndex}
                             />
                             <Button type={'button'}
@@ -239,7 +240,7 @@ export const ListPage: React.FC = () => {
                                     style={{width: 362}}
                                     onClick={() => inputValueIndex && deleteByIndex(inputValueIndex)}
                                     isLoader={stateList.isDeleteByIndex}
-                                    disabled={!inputValueIndex || arrayCharacters.length === 1 || inputValueIndex > arrayCharacters.length - 1 || inLoading}
+                                    disabled={!inputValueIndex || arrayCharacters.length === 1 || inLoading || Number(inputValueIndex) > arrayCharacters.length - 1}
                             />
                         </section>
                     </div>
