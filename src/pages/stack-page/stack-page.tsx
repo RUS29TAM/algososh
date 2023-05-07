@@ -91,16 +91,17 @@ export const StackPage: React.FC = () => {
                        disabled={isLoading || isDelete || arrayCharacters.length > 12}
                 >
                 </Input>
-                <Button type={"submit"}
+                <Button type={"button"}
                         isLoader={isLoading}
                         disabled={!inputValue || isDelete}
                         text={'Добавить'}
+                        onClick={() => addElement()}
                 >
                 </Button>
                 <Button type={"button"}
-                        disabled={!arrayCharacters.length || isDelete}
+                        disabled={!arrayCharacters.length || isLoading || isDelete}
                         text={'Удалить'}
-                        isLoader={isLoading}
+                        isLoader={isDelete}
                         onClick={() => deleteElement()}
                 >
                 </Button>
