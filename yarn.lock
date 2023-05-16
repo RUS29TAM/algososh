@@ -7810,7 +7810,7 @@
 
 "react-test-renderer@^17.0.2":
   "integrity" "sha512-yaQ9cB89c17PUb0x6UfWRs7kQCorVdHlutU1boVPEsB8IDZH6n9tHxMacc3y0JoXOJUsZb/t/Mb8FUWMKaM7iQ=="
-  "resolved" "https://registry.npmjs.org/react-test-renderer/-/react-test-renderer-17.0.2.tgz"
+  "resolved" "http://npm.prakticum-team.ru/react-test-renderer/-/react-test-renderer-17.0.2.tgz"
   "version" "17.0.2"
   dependencies:
     "object-assign" "^4.1.1"
