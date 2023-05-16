@@ -1,6 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Тест для компонента Button Компонент Button отрисовка текста компонента - тест пройден 1`] = `
+exports[`Тест для компонента Button Компонент Button type "button" - тест пройден 1`] = `
+<button
+  className="text text_type_button text_color_primary button undefined false "
+  type="button"
+>
+  <p
+    className="text undefined"
+  />
+</button>
+`;
+
+exports[`Тест для компонента Button Компонент Button type "submit" - тест пройден 1`] = `
+<button
+  className="text text_type_button text_color_primary button undefined false "
+  type="submit"
+>
+  <p
+    className="text undefined"
+  />
+</button>
+`;
+
+exports[`Тест для компонента Button Компонент Button в не активеном состоянии - тест пройден 1`] = `
+<button
+  className="text text_type_button text_color_primary button undefined false "
+  disabled={true}
+  type="button"
+>
+  <p
+    className="text undefined"
+  />
+</button>
+`;
+
+exports[`Тест для компонента Button Компонент Button в не активеном состоянии - тест пройден 2`] = `
+<button
+  className="text text_type_button text_color_primary button undefined loader "
+  disabled={true}
+  type="button"
+>
+  <img
+    alt="Загрузка."
+    className="loader_icon"
+    src="loader.svg"
+  />
+</button>
+`;
+
+exports[`Тест для компонента Button Компонент Button отрисовка компонента без текста - тест пройден 1`] = `
+<button
+  className="text text_type_button text_color_primary button undefined false "
+  type="button"
+>
+  <p
+    className="text undefined"
+  >
+    
+  </p>
+</button>
+`;
+
+exports[`Тест для компонента Button Компонент Button отрисовка компонента с текстом - тест пройден 1`] = `
 <button
   className="text text_type_button text_color_primary button undefined false "
   type="button"
