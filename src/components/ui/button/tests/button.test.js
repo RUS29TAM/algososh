@@ -1,6 +1,7 @@
 import renderer from 'react-test-renderer'
 import {render, screen, fireEvent} from "@testing-library/react";
 import {Button} from "../button";
+import {Direction} from "../../../../types/direction";
 
 describe('Тест для компонента Button', () => {
     it('Компонент Button отрисовка компонента с текстом - тест пройден', () => {
@@ -30,6 +31,16 @@ describe('Тест для компонента Button', () => {
 
     it('Компонент Button type "submit" - тест пройден', () => {
         const button = renderer.create(<Button type={'submit'} />).toJSON();
+        expect(button).toMatchSnapshot();
+    })
+
+    it('Компонент Button "сортировка по возрастанию" - тест пройден', () => {
+        const button = renderer.create(<Button sorting={Direction.Ascending} />).toJSON();
+        expect(button).toMatchSnapshot();
+    })
+
+    it('Компонент Button "сортировка по убыванию" - тест пройден', () => {
+        const button = renderer.create(<Button sorting={Direction.Descending} />).toJSON();
         expect(button).toMatchSnapshot();
     })
 })
