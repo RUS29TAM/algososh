@@ -1,3 +1,4 @@
+export const main = '/';
 export const recursion = 'a[href*="/recursion"]';
 export const fibonacci = 'a[href*="/fibonacci"]';
 export const sorting = 'a[href*="/sorting"]';

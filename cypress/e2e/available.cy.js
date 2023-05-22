@@ -1,8 +1,8 @@
-import {fibonacci, list, queue, recursion, sorting, stack} from "../support/constants";
+import {fibonacci, list, main, queue, recursion, sorting, stack} from "../support/constants";
 
 describe('Запуск приложения', () => {
     it('Отрисовка главной страницы - тест пройден', () => {
-        cy.visit('/')
+        cy.visit(main)
         cy.contains('МБОУ АЛГОСОШ')
         cy.get(recursion)
         cy.get(fibonacci)
