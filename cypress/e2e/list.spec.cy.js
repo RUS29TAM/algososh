@@ -1,4 +1,5 @@
-import {circle, circleContent} from "../support/constants";
+import {circle, circleContent, circleSmall} from "../support/constants";
+import {SHORT_DELAY_IN_MS} from "../../src/constants/delays";
 
 describe('Тест для компонента "Очередь"', () => {
     beforeEach(() => {
@@ -51,6 +52,28 @@ describe('Тест для компонента "Очередь"', () => {
                     if (index === 0) expect($item).to.contain('head');
                     if (index === 5) expect($item).to.contain('tail');
                 });
+        });
+
+        it('Добавить ноду в начало связанного списка, рендер и визуализация корректно отработаны', () => {
+            const inputValue = 'PAIN';
+            cy.get('input[placeholder="Введите  значение"]').type(inputValue);
+            cy.contains('Добавить в head').click();
+
+            cy.get(circleSmall)
+                .eq(0)
+                .should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+                .should('contain', inputValue);
+            cy.wait(SHORT_DELAY_IN_MS)
+            cy.get(circleContent).first().should('contain', inputValue);
+            cy.get(circle)
+                .eq(0)
+                .should('have.css', 'border', '4px solid rgb(127, 224, 81)')
+                .should('contain', inputValue);
+            cy.wait(SHORT_DELAY_IN_MS)
+            cy.get(circle)
+                .eq(0)
+                .should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+                .should('contain', inputValue);
         });
     });
 });
