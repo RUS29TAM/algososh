@@ -9,4 +9,5 @@ export const list = 'a[href*="/list"]'
 export const circle = '[class*=circle_circle]';
 export const circleContent = '[class*=circle_content]';
 export const stackList = '[class*=stack-page_list-elem]';
+export const circleSmall = "[class*=circle_small]";
 
