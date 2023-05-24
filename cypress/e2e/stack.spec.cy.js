@@ -1,4 +1,4 @@
-import {circle, circleContent, stackList} from "../support/constants";
+import {circle, circleContent, inputEnterText, stackList} from "../support/constants";
 import {SHORT_DELAY_IN_MS} from "../../src/constants/delays";
 
 describe('Тест для компонента "Стек"', () => {
@@ -8,21 +8,21 @@ describe('Тест для компонента "Стек"', () => {
 
     describe('Состояние кнопок компонента', () => {
         it('Кнопка не активна при пустом инпуте - тест пройден', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').should('have.value', '');
+            cy.get(inputEnterText).should('have.value', '');
             cy.contains('Добавить').should('be.disabled')
             cy.contains('Удалить').should('be.disabled')
             cy.contains('Очистить').should('be.disabled')
         })
 
         it('Кнопка "Добавить" активна. "Удалить" и "Очистить" не активны если инпут не пустой - тест пройден', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('Пять');
+            cy.get(inputEnterText).type('Пять');
             cy.contains('Добавить').should('not.be.disabled')
             cy.contains('Удалить').should('be.disabled')
             cy.contains('Очистить').should('be.disabled')
         })
 
         it('Кнопка "Удалить" активна. "Добавить" и "Очистить" не активны после добавления значений в стек - тест пройден', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('Пять');
+            cy.get(inputEnterText).type('Пять');
             cy.contains('Добавить').click()
             cy.contains('Добавить').should('be.disabled')
             cy.contains('Удалить').should('not.be.disabled')
@@ -30,13 +30,13 @@ describe('Тест для компонента "Стек"', () => {
         })
 
         it('Все Кнопки не активны после очистки стека', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('Пять');
+            cy.get(inputEnterText).type('Пять');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('Семь');
+            cy.get(inputEnterText).type('Семь');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('Ноль');
+            cy.get(inputEnterText).type('Ноль');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('Один');
+            cy.get(inputEnterText).type('Один');
             cy.contains('Добавить').click()
             cy.contains('Очистить').click()
             cy.contains('Добавить').should('be.disabled')
@@ -47,7 +47,7 @@ describe('Тест для компонента "Стек"', () => {
 
     describe('Тестирование алгоритма Стека', () => {
         it('Добавить элемент', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('Пять');
+            cy.get(inputEnterText).type('Пять');
             cy.contains('Добавить').click();
 
             cy.get(circleContent)
@@ -68,7 +68,7 @@ describe('Тест для компонента "Стек"', () => {
                 cy.wrap($item).should('have.css', 'border', '4px solid rgb(0, 50, 255)')
             })
 
-            cy.get('input[placeholder=\"Введите текст\"]').type('Ноль');
+            cy.get(inputEnterText).type('Ноль');
             cy.contains('Добавить').click();
             cy.get(circleContent)
                 .should('have.length', 2)
@@ -93,7 +93,7 @@ describe('Тест для компонента "Стек"', () => {
                 .eq(1)
                 .should('have.css', 'border', '4px solid rgb(0, 50, 255)')
 
-            cy.get('input[placeholder=\"Введите текст\"]').type('Семь')
+            cy.get(inputEnterText).type('Семь')
             cy.contains('Добавить').click();
 
             cy.get(circleContent).should('have.length', 3)
@@ -127,13 +127,13 @@ describe('Тест для компонента "Стек"', () => {
         })
 
         it('Удалить эелемент', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('Ноль');
+            cy.get(inputEnterText).type('Ноль');
             cy.contains('Добавить').click();
             cy.wait(SHORT_DELAY_IN_MS)
-            cy.get('input[placeholder=\"Введите текст\"]').type('Семь');
+            cy.get(inputEnterText).type('Семь');
             cy.contains('Добавить').click();
             cy.wait(SHORT_DELAY_IN_MS)
-            cy.get('input[placeholder=\"Введите текст\"]').type('Пять');
+            cy.get(inputEnterText).type('Пять');
             cy.contains('Добавить').click();
             cy.wait(SHORT_DELAY_IN_MS)
 
@@ -170,13 +170,13 @@ describe('Тест для компонента "Стек"', () => {
         })
 
         it('Очистка стека', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('Пять');
+            cy.get(inputEnterText).type('Пять');
             cy.contains('Добавить').click();
             cy.wait(SHORT_DELAY_IN_MS)
-            cy.get('input[placeholder=\"Введите текст\"]').type('Ноль');
+            cy.get(inputEnterText).type('Ноль');
             cy.contains('Добавить').click();
             cy.wait(SHORT_DELAY_IN_MS)
-            cy.get('input[placeholder=\"Введите текст\"]').type('Один');
+            cy.get(inputEnterText).type('Один');
             cy.contains('Добавить').click();
             cy.wait(SHORT_DELAY_IN_MS)
             cy.contains('Очистить').click();

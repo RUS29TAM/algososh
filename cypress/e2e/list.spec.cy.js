@@ -1,4 +1,4 @@
-import {circle, circleContent, circleSmall} from "../support/constants";
+import {circle, circleContent, circleSmall, inputEnterIndex, inputEnterValue} from "../support/constants";
 import {SHORT_DELAY_IN_MS} from "../../src/constants/delays";
 
 describe('Тест для компонента "Очередь"', () => {
@@ -8,7 +8,7 @@ describe('Тест для компонента "Очередь"', () => {
 
     describe('Состояние кнопок компонента "Связанный список"', () => {
         it('Поле для ввода значения пустое, все кнопки не активны кроме "Удалить из head" "Удалить из tail"', () => {
-            cy.get('input[placeholder=\"Введите  значение\"]').should('have.value', '');
+            cy.get(inputEnterValue).should('have.value', '');
             cy.contains('Удалить из head').should('not.be.disabled')
             cy.contains('Удалить из tail').should('not.be.disabled')
             cy.contains('Добавить в head').should('be.disabled')
@@ -19,7 +19,7 @@ describe('Тест для компонента "Очередь"', () => {
         })
 
         it('Поле для ввода значения не пустое, все кнопки не активны кроме "Удалить из head" "Удалить из tail"', () => {
-            cy.get('input[placeholder=\"Введите  значение\"]').type('PAIN');
+            cy.get(inputEnterValue).type('PAIN');
             cy.contains('Удалить из head').should('not.be.disabled')
             cy.contains('Удалить из tail').should('not.be.disabled')
             cy.contains('Добавить в head').should('not.be.disabled')
@@ -30,8 +30,8 @@ describe('Тест для компонента "Очередь"', () => {
         })
 
         it('Когда оба инпута заполнены данными - все кнопки активны', () => {
-            cy.get('input[placeholder=\"Введите  значение\"]').type('PAIN');
-            cy.get('input[placeholder=\"Введите  индекс\"]').type('5');
+            cy.get(inputEnterValue).type('PAIN');
+            cy.get(inputEnterIndex).type('5');
             cy.contains('Удалить из head').should('not.be.disabled')
             cy.contains('Удалить из tail').should('not.be.disabled')
             cy.contains('Добавить в head').should('not.be.disabled')

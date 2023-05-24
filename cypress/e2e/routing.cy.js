@@ -1,4 +1,5 @@
 import {DELAY_IN_MS} from "../../src/constants/delays";
+import {inputEnterNumber, inputEnterText} from "../support/constants";
 
 describe('Маршрутизация после посещения главной страницы', () => {
     before(() => {
@@ -10,7 +11,7 @@ describe('Маршрутизация после посещения главно�
         cy.contains('Строка')
         cy.get('button').contains('К оглавлению')
         cy.get('button').contains('Развернуть')
-        cy.get('input[placeholder=\"Введите текст\"]')
+        cy.get(inputEnterText)
         cy.wait(DELAY_IN_MS)
     })
 
@@ -19,7 +20,7 @@ describe('Маршрутизация после посещения главно�
         cy.contains('Последовательность Фибоначчи')
         cy.get('button').contains('К оглавлению')
         cy.get('button').contains('Рассчитать')
-        cy.get('input[placeholder=\"Введите число\"]')
+        cy.get(inputEnterNumber)
         cy.wait(DELAY_IN_MS)
     })
 
