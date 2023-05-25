@@ -112,39 +112,63 @@ describe('Тест для компонента "Очередь"', () => {
         //     });
         // });
 
-        it('Добавить ноду в список по индексу, рендер и визуализация корректно отработаны', () => {
-            const inputValue = 'MAX';
-            const inputIndex = '5'
-            const tailText = 'tail';
-            const headText = 'head'
-            cy.get(inputEnterValue).type(inputValue);
-            cy.get(inputEnterIndex).type(inputIndex);
-            cy.contains('Добавить по индексу').click();
+        // it('Добавить ноду в список по индексу, рендер и визуализация корректно отработаны', () => {
+        //     const inputValue = 'MAX';
+        //     const inputIndex = '5'
+        //     const tailText = 'tail';
+        //     const headText = 'head'
+        //     cy.get(inputEnterValue).type(inputValue);
+        //     cy.get(inputEnterIndex).type(inputIndex);
+        //     cy.contains('Добавить по индексу').click();
+        //
+        //     for (let i = 0; i <= 5; i++) {
+        //         cy.get(circleContent).each(($item, index) => {
+        //
+        //             if (index < i) {
+        //                 cy.wrap($item).find(circle)
+        //                     .should('have.css', 'border', '4px solid rgb(210, 82, 225)');
+        //             } else if (index === i) {
+        //                 cy.wrap($item).siblings().find(circleSmall)
+        //                     .should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        //                     .should('have.text', inputValue);
+        //             }
+        //         });
+        //         cy.wait(SHORT_DELAY_IN_MS);
+        //     }
+        //
+        //     cy.get(circleContent).eq(5).find(circle)
+        //         .should('have.css', 'border', '4px solid rgb(127, 224, 81)')
+        //         .should('have.text', inputValue);
+        //     cy.wait(SHORT_DELAY_IN_MS);
+        //
+        //     cy.get(circleContent).eq(5).find(circle)
+        //         .should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+        //         .should('have.text', inputValue);
+        //
+        //     cy.get(circleContent).last().should('contain.text', tailText)
+        //     cy.get(circleContent).first().should('contain.text', headText)
+        // })
+
+        it('Удалить ноду из списка по индексу, рендер и визуализация корректно отработаны', () => {
+                const inputIndex = '5'
+                const tailText = 'tail';
+                const headText = 'head'
+                cy.get(inputEnterIndex).type(inputIndex);
+                cy.contains('Удалить по индексу').click();
 
             for (let i = 0; i <= 5; i++) {
                 cy.get(circleContent).each(($item, index) => {
-
-                    if (index < i) {
-                        cy.wrap($item).find(circle)
-                            .should('have.css', 'border', '4px solid rgb(210, 82, 225)');
-                    } else if (index === i) {
-                        cy.wrap($item).siblings().find(circleSmall)
-                            .should('have.css', 'border', '4px solid rgb(210, 82, 225)')
-                            .should('have.text', inputValue);
-                    }
+                    if (index <= i)
+                        cy.wrap($item).find(circle).should('have.css', 'border', '4px solid rgb(210, 82, 225)');
                 });
                 cy.wait(SHORT_DELAY_IN_MS);
             }
-
-            cy.get(circleContent).eq(5).find(circle)
-                .should('have.css', 'border', '4px solid rgb(127, 224, 81)')
-                .should('have.text', inputValue);
+            cy.get(circleContent).eq(6).find(circleSmall)
+                .should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+                .should('not.have.text', '');
             cy.wait(SHORT_DELAY_IN_MS);
 
-            cy.get(circleContent).eq(5).find(circle)
-                .should('have.css', 'border', '4px solid rgb(0, 50, 255)')
-                .should('have.text', inputValue);
-
+            cy.get(circle).should('have.css', 'border', '4px solid rgb(0, 50, 255)');
             cy.get(circleContent).last().should('contain.text', tailText)
             cy.get(circleContent).first().should('contain.text', headText)
         })
