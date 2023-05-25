@@ -1,4 +1,4 @@
-import {circle} from "../support/constants";
+import {circle, inputEnterText} from "../support/constants";
 import {DELAY_IN_MS} from "../../src/constants/delays";
 
 describe('Тест для компонента "Строка"', () => {
@@ -8,13 +8,13 @@ describe('Тест для компонента "Строка"', () => {
 
     describe('Состояние кнопок компонента', () => {
         it('Кнопка не активна при пустом инпуте - тест пройден', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').should('have.value', '');
+            cy.get(inputEnterText).should('have.value', '');
             cy.contains('Развернуть').as('button');
             cy.get('@button').should('be.disabled')
         })
 
         it('Кнопка активна если инпут не пустой - тест пройден', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').should('have.value', '').type('Палиндром');
+            cy.get(inputEnterText).should('have.value', '').type('Палиндром');
             cy.contains('Развернуть').as('button');
             cy.get('@button').should('not.be.disabled')
         })
@@ -23,7 +23,7 @@ describe('Тест для компонента "Строка"', () => {
 
     describe('Разворот строки', () => {
         it('Строка разворачивается, стили отображаются корректно', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('123456');
+            cy.get(inputEnterText).type('123456');
             cy.get('button').contains('Развернуть').click();
             cy.get(circle).should('have.length', 6).each(($item) => {
 

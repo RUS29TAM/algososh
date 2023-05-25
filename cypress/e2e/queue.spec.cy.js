@@ -1,4 +1,4 @@
-import {circle, circleContent, stackList} from "../support/constants";
+import {circle, circleContent, inputEnterText, stackList} from "../support/constants";
 import {SHORT_DELAY_IN_MS} from "../../src/constants/delays";
 
 describe('Тест для компонента "Очередь"', () => {
@@ -8,21 +8,21 @@ describe('Тест для компонента "Очередь"', () => {
 
     describe('Состояние кнопок компонента "Очередь"', () => {
         it('Кнопка не активна при пустом инпуте', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').should('have.value', '');
+            cy.get(inputEnterText).should('have.value', '');
             cy.contains('Добавить').should('be.disabled')
             cy.contains('Удалить').should('be.disabled')
             cy.contains('Очистить').should('be.disabled')
         })
 
         it('Кнопка "Добавить" активна. "Удалить" и "Очистить" не активны если инпут не пустой', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('Пять');
+            cy.get(inputEnterText).type('Пять');
             cy.contains('Добавить').should('not.be.disabled')
             cy.contains('Удалить').should('be.disabled')
             cy.contains('Очистить').should('be.disabled')
         })
 
         it('Кнопка "Удалить" активна. "Добавить" и "Очистить" не активны после добавления значений в очередь', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('Пять');
+            cy.get(inputEnterText).type('Пять');
             cy.contains('Добавить').click()
             cy.contains('Добавить').should('be.disabled')
             cy.contains('Удалить').should('not.be.disabled')
@@ -30,13 +30,13 @@ describe('Тест для компонента "Очередь"', () => {
         })
 
         it('Все Кнопки не активны после очистки очереди', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('Пять');
+            cy.get(inputEnterText).type('Пять');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('Семь');
+            cy.get(inputEnterText).type('Семь');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('Ноль');
+            cy.get(inputEnterText).type('Ноль');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('Один');
+            cy.get(inputEnterText).type('Один');
             cy.contains('Добавить').click()
             cy.contains('Очистить').click()
             cy.contains('Добавить').should('be.disabled')
@@ -47,7 +47,7 @@ describe('Тест для компонента "Очередь"', () => {
 
     describe('Тестирование алгоритма очереди', () => {
         it('Добавить элемент работает, элементы визуализированы корректно', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('O_o');
+            cy.get(inputEnterText).type('O_o');
             cy.contains('Добавить').click();
 
             cy.get(circleContent)
@@ -99,7 +99,7 @@ describe('Тест для компонента "Очередь"', () => {
                 .eq(1)
                 .should('have.css', 'border', '4px solid rgb(0, 50, 255)');
 
-            cy.get('input[placeholder=\"Введите текст\"]').type('5555');
+            cy.get(inputEnterText).type('5555');
             cy.contains('Добавить').click();
             cy.get(circleContent)
                 .first()
@@ -135,19 +135,19 @@ describe('Тест для компонента "Очередь"', () => {
         })
 
         it('Удалить элемент работает, элементы визуализированы корректно', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('one');
+            cy.get(inputEnterText).type('one');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('two');
+            cy.get(inputEnterText).type('two');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('три');
+            cy.get(inputEnterText).type('три');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('four');
+            cy.get(inputEnterText).type('four');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('five');
+            cy.get(inputEnterText).type('five');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('six');
+            cy.get(inputEnterText).type('six');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('S7');
+            cy.get(inputEnterText).type('S7');
             cy.contains('Добавить').click()
 
             cy.get(circleContent)
@@ -480,19 +480,19 @@ describe('Тест для компонента "Очередь"', () => {
         })
 
         it('Очистить очередь работает корректно', () => {
-            cy.get('input[placeholder=\"Введите текст\"]').type('one');
+            cy.get(inputEnterText).type('one');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('two');
+            cy.get(inputEnterText).type('two');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('три');
+            cy.get(inputEnterText).type('три');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('four');
+            cy.get(inputEnterText).type('four');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('five');
+            cy.get(inputEnterText).type('five');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('six');
+            cy.get(inputEnterText).type('six');
             cy.contains('Добавить').click()
-            cy.get('input[placeholder=\"Введите текст\"]').type('S7');
+            cy.get(inputEnterText).type('S7');
             cy.contains('Добавить').click()
             cy.contains('Очистить').click();
             cy.get(stackList).should('have.length', 0)
