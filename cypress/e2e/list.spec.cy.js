@@ -149,28 +149,49 @@ describe('Тест для компонента "Очередь"', () => {
         //     cy.get(circleContent).first().should('contain.text', headText)
         // })
 
-        it('Удалить ноду из списка по индексу, рендер и визуализация корректно отработаны', () => {
-                const inputIndex = '5'
-                const tailText = 'tail';
-                const headText = 'head'
-                cy.get(inputEnterIndex).type(inputIndex);
-                cy.contains('Удалить по индексу').click();
+        // it('Удалить ноду из списка по индексу, рендер и визуализация корректно отработаны', () => {
+        //         const inputIndex = '5'
+        //         const tailText = 'tail';
+        //         const headText = 'head'
+        //         cy.get(inputEnterIndex).type(inputIndex);
+        //         cy.contains('Удалить по индексу').click();
+        //
+        //     for (let i = 0; i <= 5; i++) {
+        //         cy.get(circleContent).each(($item, index) => {
+        //             if (index <= i)
+        //                 cy.wrap($item).find(circle).should('have.css', 'border', '4px solid rgb(210, 82, 225)');
+        //         });
+        //         cy.wait(SHORT_DELAY_IN_MS);
+        //     }
+        //     cy.get(circleContent).eq(6).find(circleSmall)
+        //         .should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        //         .should('not.have.text', '');
+        //     cy.wait(SHORT_DELAY_IN_MS);
+        //
+        //     cy.get(circle).should('have.css', 'border', '4px solid rgb(0, 50, 255)');
+        //     cy.get(circleContent).last().should('contain.text', tailText)
+        //     cy.get(circleContent).first().should('contain.text', headText)
+        // })
 
-            for (let i = 0; i <= 5; i++) {
-                cy.get(circleContent).each(($item, index) => {
-                    if (index <= i)
-                        cy.wrap($item).find(circle).should('have.css', 'border', '4px solid rgb(210, 82, 225)');
-                });
-                cy.wait(SHORT_DELAY_IN_MS);
-            }
-            cy.get(circleContent).eq(6).find(circleSmall)
+        it('Удалить ноду из head, рендер и визуализация корректно отработаны', () => {
+            const tailText = 'tail';
+            const headText = 'head'
+            cy.contains('Удалить из head').click()
+
+            cy.get(circleContent).first().siblings().find(circleSmall)
                 .should('have.css', 'border', '4px solid rgb(210, 82, 225)')
                 .should('not.have.text', '');
             cy.wait(SHORT_DELAY_IN_MS);
 
-            cy.get(circle).should('have.css', 'border', '4px solid rgb(0, 50, 255)');
-            cy.get(circleContent).last().should('contain.text', tailText)
-            cy.get(circleContent).first().should('contain.text', headText)
+            cy.get(circleContent).first().find(circle)
+                .should('have.css', 'border', '4px solid rgb(127, 224, 81)');
+            cy.wait(SHORT_DELAY_IN_MS);
+
+            cy.get(circleContent).first().find(circle)
+                .should('have.css', 'border', '4px solid rgb(0, 50, 255)');
+
+            cy.get(circleContent).last().should('contain.text', tailText);
+            cy.get(circleContent).first().should('contain.text', headText);
         })
     });
 });
