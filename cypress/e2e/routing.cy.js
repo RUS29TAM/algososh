@@ -1,5 +1,5 @@
 import {DELAY_IN_MS} from "../../src/constants/delays";
-import {inputEnterNumber, inputEnterText} from "../support/constants";
+import {inputEnterIndex, inputEnterNumber, inputEnterText, inputEnterValue} from "../support/constants";
 
 describe('Маршрутизация после посещения главной страницы', () => {
     before(() => {
@@ -43,7 +43,7 @@ describe('Маршрутизация после посещения главно�
         cy.get('button').contains('Добавить')
         cy.get('button').contains('Удалить')
         cy.get('button').contains('Очистить')
-        cy.get('input[placeholder=\"Введите текст\"]')
+        cy.get(inputEnterText)
         cy.wait(DELAY_IN_MS)
     })
 
@@ -54,7 +54,7 @@ describe('Маршрутизация после посещения главно�
         cy.get('button').contains('Добавить')
         cy.get('button').contains('Удалить')
         cy.get('button').contains('Очистить')
-        cy.get('input[placeholder=\"Введите текст\"]')
+        cy.get(inputEnterText)
         cy.wait(DELAY_IN_MS)
     })
 
@@ -68,8 +68,8 @@ describe('Маршрутизация после посещения главно�
         cy.get('button').contains('Удалить из tail')
         cy.get('button').contains('Удалить по индексу')
         cy.get('button').contains('Добавить по индексу')
-        cy.get('input[placeholder=\"Введите  индекс\"]')
-        cy.get('input[placeholder=\"Введите  значение\"]')
+        cy.get(inputEnterIndex)
+        cy.get(inputEnterValue)
         cy.wait(DELAY_IN_MS)
     })
 })
