@@ -177,7 +177,7 @@ export const ListPage: React.FC = () => {
                                isLimitText={true}
                                maxLength={4}
                                style={{width: 204, marginRight: 12}}
-                               placeholder={'Введите  значение'}
+                               placeholder={'Введите значение'}
                                disabled={inLoading}
                                onChange={onChange}
                         >
@@ -223,7 +223,7 @@ export const ListPage: React.FC = () => {
                                min={0}
                                max={arrayCharacters.length - 1}
                                style={{width: 204, marginRight: 12}}
-                               placeholder={'Введите  индекс'}
+                               placeholder={'Введите индекс'}
                                disabled={inLoading}
                         >
                         </Input>
