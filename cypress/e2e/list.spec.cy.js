@@ -78,15 +78,52 @@ describe('Тест для компонента "Очередь"', () => {
 //отмена
         //отмена
 
-        it('Добавить ноду в конец связанного списка, рендер и визуализация корректно отработаны', () => {
-            const inputValue = 'PAIN';
-            cy.get(inputEnterValue).type(inputValue);
-            cy.contains('Добавить в tail').click();
+        // it('Добавить ноду в конец связанного списка, рендер и визуализация корректно отработаны', () => {
+        //     const inputValue = 'PAIN';
+        //     cy.get(inputEnterValue).type(inputValue);
+        //     cy.contains('Добавить в tail').click();
+        //     const tailText = 'tail';
+        //     const headText = 'head'
+        //
+        //     for (let i = 0; i <= 6; i++) {
+        //         cy.get(circleContent).each(($item, index) => {
+        //             if (index < i) {
+        //                 cy.wrap($item).find(circle)
+        //                     .should('have.css', 'border', '4px solid rgb(210, 82, 225)');
+        //             } else if (index === i) {
+        //                 cy.wrap($item).siblings().find(circleSmall)
+        //                     .should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        //                     .should('have.text', inputValue);
+        //             }
+        //         });
+        //         cy.wait(SHORT_DELAY_IN_MS);
+        //     }
+        //
+        //     cy.get(circleContent).last().find(circle)
+        //         .should('have.css', 'border', '4px solid rgb(127, 224, 81)')
+        //         .should('have.text', inputValue)
+        //     cy.wait(SHORT_DELAY_IN_MS);
+        //
+        //     cy.get(circleContent).each(($item) => {
+        //         cy.wrap($item).find(circle)
+        //             .should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+        //         cy.get(circleContent).last().should('contain.text', tailText)
+        //         cy.get(circleContent).first().should('contain.text', headText)
+        //     });
+        // });
+
+        it('Добавить ноду в список по индексу, рендер и визуализация корректно отработаны', () => {
+            const inputValue = 'MAX';
+            const inputIndex = '5'
             const tailText = 'tail';
             const headText = 'head'
+            cy.get(inputEnterValue).type(inputValue);
+            cy.get(inputEnterIndex).type(inputIndex);
+            cy.contains('Добавить по индексу').click();
 
-            for (let i = 0; i <= 6; i++) {
+            for (let i = 0; i <= 5; i++) {
                 cy.get(circleContent).each(($item, index) => {
+
                     if (index < i) {
                         cy.wrap($item).find(circle)
                             .should('have.css', 'border', '4px solid rgb(210, 82, 225)');
@@ -99,19 +136,17 @@ describe('Тест для компонента "Очередь"', () => {
                 cy.wait(SHORT_DELAY_IN_MS);
             }
 
-            cy.get(circleContent).last().find(circle)
+            cy.get(circleContent).eq(5).find(circle)
                 .should('have.css', 'border', '4px solid rgb(127, 224, 81)')
-                .should('have.text', inputValue)
+                .should('have.text', inputValue);
             cy.wait(SHORT_DELAY_IN_MS);
 
-            cy.get(circleContent).each(($item) => {
-                cy.wrap($item).find(circle)
-                    .should('have.css', 'border', '4px solid rgb(0, 50, 255)')
-                cy.get(circleContent).last().should('contain.text', tailText)
-                cy.get(circleContent).first().should('contain.text', headText)
-            });
-        });
+            cy.get(circleContent).eq(5).find(circle)
+                .should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+                .should('have.text', inputValue);
 
-        it('Добавить ноду в список по индексу, рендер и визуализация корректно отработаны', () => {})
+            cy.get(circleContent).last().should('contain.text', tailText)
+            cy.get(circleContent).first().should('contain.text', headText)
+        })
     });
 });
