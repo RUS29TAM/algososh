@@ -7,3 +7,6 @@ export const queue = 'a[href*="/queue"]';
 export const list = 'a[href*="/list"]'
 
 export const circle = '[class*=circle_circle]';
+export const circleContent = '[class*=circle_content]';
+export const stackList = '[class*=stack-page_list-elem]';
+

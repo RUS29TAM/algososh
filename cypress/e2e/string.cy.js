@@ -13,7 +13,7 @@ describe('Тест для компонента "Строка"', () => {
             cy.get('@button').should('be.disabled')
         })
 
-        it('Кнопка активна в инпут не пустой - тест пройден', () => {
+        it('Кнопка активна если инпут не пустой - тест пройден', () => {
             cy.get('input[placeholder=\"Введите текст\"]').should('have.value', '').type('Палиндром');
             cy.contains('Развернуть').as('button');
             cy.get('@button').should('not.be.disabled')
