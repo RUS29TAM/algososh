@@ -82,22 +82,36 @@ describe('Тест для компонента "Очередь"', () => {
             const inputValue = 'PAIN';
             cy.get(inputEnterValue).type(inputValue);
             cy.contains('Добавить в tail').click();
+            const tailText = 'tail';
+            const headText = 'head'
 
-            cy.get(circleContent).last().should('contain', inputValue);
-
-            cy.get(circle)
-                .should('have.length', 7)
-                .each(($circle, index) => {
-                    if (index === 6) {
-                        cy.wrap($circle)
-                            .siblings(circleSmall)
-                            .should('have.css', 'border', '4px solid rgb(210, 82, 225)')
-                            .should('contain', inputValue);
-                    } else if (index < 6) {
-                        cy.wrap($circle)
+            for (let i = 0; i <= 6; i++) {
+                cy.get(circleContent).each(($item, index) => {
+                    if (index < i) {
+                        cy.wrap($item).find(circle)
                             .should('have.css', 'border', '4px solid rgb(210, 82, 225)');
+                    } else if (index === i) {
+                        cy.wrap($item).siblings().find(circleSmall)
+                            .should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+                            .should('have.text', inputValue);
                     }
                 });
+                cy.wait(SHORT_DELAY_IN_MS);
+            }
+
+            cy.get(circleContent).last().find(circle)
+                .should('have.css', 'border', '4px solid rgb(127, 224, 81)')
+                .should('have.text', inputValue)
+            cy.wait(SHORT_DELAY_IN_MS);
+
+            cy.get(circleContent).each(($item) => {
+                cy.wrap($item).find(circle)
+                    .should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+                cy.get(circleContent).last().should('contain.text', tailText)
+                cy.get(circleContent).first().should('contain.text', headText)
+            });
         });
+
+        it('Добавить ноду в список по индексу, рендер и визуализация корректно отработаны', () => {})
     });
 });
