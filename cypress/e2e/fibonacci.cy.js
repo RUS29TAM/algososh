@@ -6,19 +6,19 @@ describe('Тест для компонента "Фибоначчи"', () => {
         cy.visit('/fibonacci');
     })
     describe('Состояние кнопок компонента', () => {
-        it('Кнопка не активна при пустом инпуте - тест пройден', () => {
+        it('Кнопка не активна при пустом инпуте', () => {
             cy.get(inputEnterNumber).should('have.value', '');
             cy.contains('Рассчитать').as('button');
             cy.get('@button').should('be.disabled');
         })
 
-        it('Кнопка активна в инпут не пустой - тест пройден', () => {
+        it('Кнопка активна в инпут не пустой', () => {
             cy.get(inputEnterNumber).type('9');
             cy.contains('Рассчитать').as('button');
             cy.get('@button').should('not.be.disabled');
         })
 
-        it('Кнопка не активна если инпут не валиден > 19 - тест пройден', () => {
+        it('Кнопка не активна если инпут не валиден > 19', () => {
             cy.get(inputEnterNumber).should('have.value', '').type('20');
             cy.contains('Рассчитать').as('button');
             cy.get('@button').should('be.disabled');

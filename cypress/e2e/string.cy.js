@@ -7,13 +7,13 @@ describe('Тест для компонента "Строка"', () => {
     })
 
     describe('Состояние кнопок компонента', () => {
-        it('Кнопка не активна при пустом инпуте - тест пройден', () => {
+        it('Кнопка не активна при пустом инпуте', () => {
             cy.get(inputEnterText).should('have.value', '');
             cy.contains('Развернуть').as('button');
             cy.get('@button').should('be.disabled')
         })
 
-        it('Кнопка активна если инпут не пустой - тест пройден', () => {
+        it('Кнопка активна если инпут не пустой', () => {
             cy.get(inputEnterText).should('have.value', '').type('Палиндром');
             cy.contains('Развернуть').as('button');
             cy.get('@button').should('not.be.disabled')
