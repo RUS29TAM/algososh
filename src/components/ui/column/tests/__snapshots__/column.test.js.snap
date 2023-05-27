@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Тест для компонента Column Компонент Column отрисовка отрисовка в состоянии Changing 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="column changing"
+    style={
+      Object {
+        "height": 6.4,
+      }
+    }
+  />
+  <p
+    className="text text_type_column text_color_input mt-3"
+  >
+    2
+  </p>
+</div>
+`;
+
+exports[`Тест для компонента Column Компонент Column отрисовка отрисовка в состоянии Default 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="column default"
+    style={
+      Object {
+        "height": 3.2,
+      }
+    }
+  />
+  <p
+    className="text text_type_column text_color_input mt-3"
+  >
+    1
+  </p>
+</div>
+`;
+
+exports[`Тест для компонента Column Компонент Column отрисовка отрисовка в состоянии Modified 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="column modified"
+    style={
+      Object {
+        "height": 9.6,
+      }
+    }
+  />
+  <p
+    className="text text_type_column text_color_input mt-3"
+  >
+    3
+  </p>
+</div>
+`;
+
+exports[`Тест для компонента Column Компонент Column отрисовка по индексу 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="column default"
+    style={
+      Object {
+        "height": 1,
+      }
+    }
+  />
+  <p
+    className="text text_type_column text_color_input mt-3"
+  >
+    0
+  </p>
+</div>
+`;

@@ -59,7 +59,7 @@ export const StackPage: React.FC = () => {
     const deleteElement = async () => {//удаляем элементы
         setIsDelete(true);//блокируем кнопки
         stack.pop();//удаляем последний элемент из массива
-        if (stack.size) {//ставим условие для массива
+        if (stack.size()) {//ставим условие для массива
             arrayCharacters.pop();//удаляем последний элемент из массива
             arrayCharacters[arrayCharacters.length - 1].head = 'top'; //меняем стейт для для головы
             arrayCharacters[arrayCharacters.length - 1].state = ElementStates.Changing;//визуализируем изменения

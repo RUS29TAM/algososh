@@ -13,7 +13,7 @@ export default class Queue<T> implements IQueue<T> {
     private _head: number = 0;
     private _tail: number = 0;
     private readonly size: number = 0;
-    private length: number = 0;
+    length: number = 0;
 
     constructor(size: number) {
         this.size = size;
